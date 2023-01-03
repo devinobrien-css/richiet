@@ -31,8 +31,6 @@ const events = [
 
 const Carousel = () => {
   const [current,setIndex] = useState(0)
-
-  console.log(current)
   
   return (
     <div className="relative">
@@ -73,11 +71,58 @@ const Carousel = () => {
 }
 
 
+const AboutPhoto = () => {
+  return (
+    <svg width="850" height="889" viewBox="0 0 850 889" fill="none">
+      <ellipse cx="456.5" cy="259" rx="258.5" ry="259" fill="#F95C75" fill-opacity="0.98"/>
+      <circle cx="245.5" cy="352.5" r="245.5" fill="#EDC1C8" fill-opacity="0.98"/>
+      <circle cx="745.5" cy="798.5" r="52.5" fill="#EDC1C8" fill-opacity="0.98"/>
+      <circle cx="599.5" cy="806.5" r="52.5" fill="#F95C75" fill-opacity="0.98"/>
+      <ellipse cx="812" cy="723.5" rx="31" ry="30.5" fill="#EDC1C8" fill-opacity="0.98"/>
+      <ellipse cx="831" cy="624" rx="19" ry="21" fill="#EDC1C8" fill-opacity="0.98"/>
+      <ellipse cx="715" cy="687.5" rx="31" ry="30.5" fill="#EDC1C8" fill-opacity="0.98"/>
+      <ellipse cx="460" cy="851.5" rx="31" ry="30.5" fill="#EDC1C8" fill-opacity="0.98"/>
+      <ellipse cx="630" cy="858.5" rx="31" ry="30.5" fill="#EDC1C8" fill-opacity="0.98"/>
+      <ellipse cx="806" cy="621.5" rx="25" ry="23.5" fill="#F95C75" fill-opacity="0.98"/>
+      <ellipse cx="709" cy="710.5" rx="25" ry="23.5" fill="#F95C75" fill-opacity="0.98"/>
+      <rect x="106" y="107" width="700" height="699" rx="349.5" fill="url(#pattern0)"/>
+
+
+      <g clip-path="url(#circle-clip)" transform="translate(0 150)" >
+        <image href="./img/main.jpg" width="1186" height="697" filter="url(#discrete)" />
+      </g>
+      <g style={{mixBlendMode:"color-burn"}}>
+        <rect x="106" y="107" width="700" height="699" rx="349.5" fill="url(#pattern1)"/>
+      </g>
+      <circle x="0" y="0" width="1000" height="1000" fill="url(#image)"/>
+      <defs>
+        <filter id="gamma">
+            <feComponentTransfer>
+                <feFuncR type="gamma" amplitude="2" exponent="1"/>
+                <feFuncG type="gamma" amplitude="2" exponent="3"/>
+                <feFuncB type="gamma" amplitude="2" exponent="1"/>
+            </feComponentTransfer>
+        </filter>
+        <filter id="discrete">
+          <feComponentTransfer>
+            <feFuncR type="discrete" tableValues="0 .5 1 1"/>
+            <feFuncG type="discrete" tableValues="0  5 1"/>
+            <feFuncB type="discrete" tableValues="0 .5 1 1"/>
+          </feComponentTransfer>
+        </filter>
+        <circle id="circle" cx="450" cy="350" r="350" vector-effect="non-scaling-stroke"/>
+        <clipPath id="circle-clip">
+          <use href="#circle"/>
+        </clipPath>
+      </defs>
+    </svg>
+
+  )
+}
+
 
 function App() {
   const [section,setSection] = useState('about')
-
-  
 
   return (
     <div className="bg-clr-navy p-8">
@@ -116,6 +161,7 @@ function App() {
             </div>
             <Carousel />
           </div>
+          <AboutPhoto />
         </div>
       </div>    
     </div>
