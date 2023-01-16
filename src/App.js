@@ -129,7 +129,7 @@ function App() {
       <div className="m-4 border-2 border-white rounded-xl p-4">
         <div className="flex justify-between">
           <div className="w-1/4">
-            LOGO
+
           </div>
           <div className="w-1/2 flex justify-evenly">
             <p onClick={()=>setSection('about')} className={`transition-all cursor-pointer border-t-2 ${section==='about'?'text-clr-red border-clr-red':'text-white border-transparent'}`}>about</p>
