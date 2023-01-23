@@ -1,6 +1,8 @@
 import { Icon } from "@iconify/react";
 import gsap from "gsap";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { TitleXl } from "../components/component.library";
+import { gigs } from "../data/gig.data";
 
 const events = [
     {
@@ -20,10 +22,10 @@ const events = [
       location:''
     },
     {
-      title:'event4'
+      title:'The Late Late'
     },
     {
-      title:'event5'
+      title:'Stitch'
     },
     {}
   ]
@@ -33,44 +35,53 @@ const events = [
     const [current,setIndex] = useState(0)
     
     return (
-      <div className="relative">
-        <div 
-          className="text-white absolute border top-1/2" 
-          onClick={()=>{
-            if(current >= 0)
-              setIndex(current-1)
-          }}
-        >
-          <Icon icon="material-symbols:arrow-back-ios-new-rounded" />
-        </div>
-        <div 
-          className="text-white absolute border top-1/2 right-0"
-          onClick={()=>{
-            if(current<events.length-3)
-              setIndex(current+1)
-          }}
-        >
-          <Icon icon="material-symbols:arrow-forward-ios-rounded" />
-        </div>
-        
-        <div className="w-4/5 my-8 flex overflow-hidden no-wrap mx-auto">
-          {
-            events.map((event,index) => {
-              const translate =  `-translate-x-[${current*100}%]`
-  
-              return (
-                <div key={index} className={`transition-all transform-gpu border rounded h-32 flex items-center w-1/3 scale-75 my-auto shrink-0 ${translate} ${index===current+1?'scale-100':'scale-75'} ${index===events.length-1?'hidden':''}`}>
-                  <p className="text-white mx-auto">{event.title}</p>
-                </div>      
-              )
-            })
-          }
-        </div>
-      </div>
+		<div className="relative">
+			<div 
+				className="text-white absolute top-1/2 cursor-pointer" 
+				onClick={()=>{
+					if(current >= 0)
+						setIndex(current-1)
+				}}
+			>
+			<Icon icon="material-symbols:arrow-back-ios-new-rounded" />
+			</div>
+			<div 
+				className="text-white absolute top-1/2 cursor-pointer right-0"
+				onClick={()=>{
+					if(current<events.length-4)
+						setIndex(current+1)
+				}}
+			>
+				<Icon icon="material-symbols:arrow-forward-ios-rounded" />
+			</div>
+			
+			<div className="w-4/5 my-8 flex overflow-hidden no-wrap mx-auto">
+				{
+					gigs.map((gig,index) => {
+						//   const translate =  `-translate-x-[${current*100}%]`
+						const scale = index===current+1?'scale-100':'scale-75'
+						return (
+							<div key={index} style={{transform:`translateX(-${current*100}%)`, backgroundImage:`url(./img/${gig.img[0]})`}} className={`transition-all transform bg-cover bg-no-repeat rounded h-32 flex items-center w-1/3 my-auto shrink-0 scale-95 ${index===events.length-1?'hidden':''}`}>
+							</div>      
+						)
+					})
+				}
+			</div>
+		</div>
     )
 }
 
-const AboutPhoto = () => {
+const AboutPhoto = ({className}) => {
+	useEffect(() => {
+		gsap.fromTo("#content",{
+			opacity:0,
+			scale:0.7
+		},{
+			opacity:1,
+			scale:1
+		})
+	},[])
+
     useLayoutEffect(() => {
       gsap.fromTo("#circle-image",{
         opacity:0.8
@@ -83,18 +94,18 @@ const AboutPhoto = () => {
     },[])
   
     return (
-      <svg width="850" height="809" viewBox="0 0 850 889" fill="none">
-        <ellipse cx="456.5" cy="259" rx="258.5" ry="259" fill="#F95C75" fill-opacity="0.98"/>
-        <circle cx="245.5" cy="352.5" r="245.5" fill="#EDC1C8" fill-opacity="0.98"/>
-        <circle cx="745.5" cy="798.5" r="52.5" fill="#EDC1C8" fill-opacity="0.98"/>
-        <circle cx="599.5" cy="806.5" r="52.5" fill="#F95C75" fill-opacity="0.98"/>
-        <ellipse cx="812" cy="723.5" rx="31" ry="30.5" fill="#EDC1C8" fill-opacity="0.98"/>
-        <ellipse cx="831" cy="624" rx="19" ry="21" fill="#EDC1C8" fill-opacity="0.98"/>
-        <ellipse cx="715" cy="687.5" rx="31" ry="30.5" fill="#EDC1C8" fill-opacity="0.98"/>
-        <ellipse cx="460" cy="851.5" rx="31" ry="30.5" fill="#EDC1C8" fill-opacity="0.98"/>
-        <ellipse cx="630" cy="858.5" rx="31" ry="30.5" fill="#EDC1C8" fill-opacity="0.98"/>
-        <ellipse cx="806" cy="621.5" rx="25" ry="23.5" fill="#F95C75" fill-opacity="0.98"/>
-        <ellipse cx="709" cy="710.5" rx="25" ry="23.5" fill="#F95C75" fill-opacity="0.98"/>
+      <svg id="content" viewBox="0 0 850 889" fill="none" className={`${className}`}>
+        <ellipse cx="456.5" cy="259" rx="258.5" ry="259" fill="#F95C75" fillOpacity="0.98"/>
+        <circle cx="245.5" cy="352.5" r="245.5" fill="#EDC1C8" fillOpacity="0.98"/>
+        <circle cx="745.5" cy="798.5" r="52.5" fill="#EDC1C8" fillOpacity="0.98"/>
+        <circle cx="599.5" cy="806.5" r="52.5" fill="#F95C75" fillOpacity="0.98"/>
+        <ellipse cx="812" cy="723.5" rx="31" ry="30.5" fill="#EDC1C8" fillOpacity="0.98"/>
+        <ellipse cx="831" cy="624" rx="19" ry="21" fill="#EDC1C8" fillOpacity="0.98"/>
+        <ellipse cx="715" cy="687.5" rx="31" ry="30.5" fill="#EDC1C8" fillOpacity="0.98"/>
+        <ellipse cx="460" cy="851.5" rx="31" ry="30.5" fill="#EDC1C8" fillOpacity="0.98"/>
+        <ellipse cx="630" cy="858.5" rx="31" ry="30.5" fill="#EDC1C8" fillOpacity="0.98"/>
+        <ellipse cx="806" cy="621.5" rx="25" ry="23.5" fill="#F95C75" fillOpacity="0.98"/>
+        <ellipse cx="709" cy="710.5" rx="25" ry="23.5" fill="#F95C75" fillOpacity="0.98"/>
         <rect x="106" y="107" width="700" height="699" rx="349.5" fill="url(#pattern0)"/>
   
   
@@ -120,7 +131,7 @@ const AboutPhoto = () => {
               <feFuncB type="discrete" tableValues="0 .5 1 1"/>
             </feComponentTransfer>
           </filter>
-          <circle id="circle" cx="450" cy="350" r="350" vector-effect="non-scaling-stroke"/>
+          <circle id="circle" cx="450" cy="350" r="350" vectorEffect="non-scaling-stroke"/>
           <clipPath id="circle-clip">
             <use href="#circle"/>
           </clipPath>
@@ -131,29 +142,37 @@ const AboutPhoto = () => {
 }
 
 export const About = () => {
+  	useEffect(() => {
+		gsap.fromTo("#content",{
+			opacity:0,
+			scale:0.7
+		},{
+			opacity:1,
+			scale:1
+		})
+	},[])
 
     return (
-        <div className="md:flex">
-          <div className="p-8 mt-24 md:w-7/12">
-            <div>
-              <p className="text-white text-7xl font-light">This months</p>
-              <p className="text-white text-7xl ">Crowd Gathering gigs !</p>
+        <div id="content" className="md:flex">
+			<div className="md:p-8 mt-4 md:mt-24 md:w-11/12">
+				<div className="">
+					<TitleXl>Rich Townsend & The Nightrain</TitleXl>
 
-              <p className="text-gray-500 py-4">
-                Lorem ipsum dolor, sit amet consectetur 
-                adipisicing elit. Molestias nostrum veniam 
-                eaque molestiae, eligendi quod nam voluptate 
-                velit quaerat corporis!
-              </p>
+					<p className="text-gray-500 py-4">
+						We're Rich Townsend and the Nightrain- a blues, jazz and rock n' roll band based in New York. Get groovy with us! You won't be disappointed!
+					</p>
+					<div className="sm:flex sm:items-center sm:justify-evenly md:block">
+						<AboutPhoto className="md:w-0 w-full max-w-[400px]" />
 
-              <div className="">
-                <button className="rounded-3xl bg-clr-red text-white text-lg py-2 px-8">Listen Now</button>
-                <button className="rounded-3xl bg-clr-red text-white text-lg py-2 px-8 ml-8">What's Next</button>
-              </div>
-            </div>
-            <Carousel />
-          </div>
-          <AboutPhoto />
+						<div className="md:flex flex-nowrap justify-evenly">
+							<button className="rounded-3xl bg-clr-red text-white text-lg py-2 px-8 md:m-0 mx-auto block my-2">Listen Now</button>
+							<button className="rounded-3xl bg-clr-red text-white text-lg py-2 px-8 md:m-0 mx-auto block my-2">What's Next</button>
+						</div>
+					</div>
+				</div>
+				<Carousel />
+			</div>
+          <AboutPhoto  className="md:w-full w-0"/>
         </div>
     )
 }

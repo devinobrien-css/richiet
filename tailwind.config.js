@@ -22,6 +22,8 @@ module.exports = {
 			},
       backgroundImage:{
         'riche':'url(./img/richie.png)',
+        'terra1':'url(./img/terra.jpg)',
+        'bitter1':'url(./img/bitter.jpg)',
       },
       transitionProperty: {
         'height': 'height',
